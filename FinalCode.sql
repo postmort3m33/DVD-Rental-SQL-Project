@@ -18,8 +18,8 @@ create table summarized_report (
 	country VARCHAR (50) NOT NULL
 );
 
---SELECT * FROM detailed_report;
-
+-- Test 
+SELECT * FROM detailed_report;
 
 
 
@@ -37,7 +37,8 @@ insert into detailed_report
 	and city.country_id = country.country_id
 	order by country.country_id;
 
---SELECT * FROM detailed_report;
+-- Test
+SELECT * FROM detailed_report;
 
 
 
@@ -62,17 +63,18 @@ begin
 end;
 $$;
 
---update detailed_report
---set address2 = 'Apt#2'
---where customer_id = 1;
+-- Test
+update detailed_report
+set address2 = 'Apt#2'
+where customer_id = 1;
 
---update detailed_report
---set address2 = 'Apt#2'
---where customer_id = 2;
+update detailed_report
+set address2 = 'Apt#2'
+where customer_id = 2;
 
---select customer_id, first_name, last_name, combine_address(address, address2) as new_address
---from detailed_report
---where customer_id = 1 or customer_id = 2;
+select customer_id, first_name, last_name, combine_address(address, address2) as new_address
+from detailed_report
+where customer_id = 1 or customer_id = 2;
 
 
 --------------------
@@ -98,25 +100,25 @@ begin
 end;
 $$;
 
+-- Test
+create trigger update_summarized_table_trigger
+after insert
+on detailed_report
+for each statement
+execute procedure update_summarized_table()
 
---create trigger update_summarized_table_trigger
---after insert
---on detailed_report
---for each statement
---execute procedure update_summarized_table()
 
+INSERT into detailed_report
+VALUES (999, 'James', 'Touchstone', '17911 Kings Park Ln', 'Apt#1202',
+		'Houston', '77058', 'United States');
 
---INSERT into detailed_report
---VALUES (999, 'James', 'Touchstone', '17911 Kings Park Ln', 'Apt#1202',
---		'Houston', '77058', 'United States');
+SELECT * FROM summarized_report;
 
---SELECT * FROM summarized_report;
+INSERT into detailed_report
+VALUES (1000, 'Elisa', 'Combs', '17911 Kings Park Ln', 'Apt#1202',
+		'Houston', '77058', 'United States');
 
---INSERT into detailed_report
---VALUES (1000, 'Elisa', 'Combs', '17911 Kings Park Ln', 'Apt#1202',
---		'Houston', '77058', 'United States');
-
---SELECT * FROM summarized_report;
+SELECT * FROM summarized_report;
 
 
 
@@ -156,6 +158,8 @@ begin
 end;
 $$;
 
---call refresh_reports()
+-- Test
+call refresh_reports()
 
---SELECT * from summarized_report;
+SELECT * from summarized_report;
+
